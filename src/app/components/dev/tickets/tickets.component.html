@@ -1,0 +1,40 @@
+<app-header></app-header>
+
+<div class="container">
+  <h3>Tickets Asignados</h3>
+  <hr>
+  <table class="table">
+    <thead class="table-light">
+      <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Usuario Creador</th>
+        <th>Usuario Asignado</th>
+        <th>Fecha Asignación</th>
+        <th>Fecha Resolución</th>
+        <th>Fecha Creación</th>
+        <th>Estado</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ticket of tickets">
+        <td>{{ticket.id}}</td>
+        <td>{{ticket.subject}}</td>
+        <td>{{ticket.creator_user}}</td>
+        <td>{{ticket.assigned_user}}</td>
+        <td>{{ticket.assignment_date | date: 'dd/MM/yyyy'}}</td>
+        <td>{{ticket.resolution_date | date: 'dd/MM/yyyy'}}</td>
+        <td>{{ticket.createdAt | date: 'dd/MM/yyyy'}}</td>
+        <td>{{ticket.status_name}}</td>
+        <td *ngIf="ticket.status_id == 1">
+          <select name="cmbStatus" (change)="changeStatus($event, ticket.id)" class="form-select" aria-label="Default select example">
+            <option selected>Selecciona...</option>
+            <option value="{{status.id}}" *ngFor="let status of unresolvedStatuses">{{status.name}}</option>
+          </select>
+        </td>
+        <td *ngIf="ticket.status_id != 1"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

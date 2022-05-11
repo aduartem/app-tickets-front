@@ -1,0 +1,29 @@
+<main class="form-signin text-center">
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <h1 class="h3 mb-3 fw-normal">Login</h1>
+
+    <div class="form-floating">
+      <input type="text" formControlName="username" class="form-control" placeholder="Username">
+      <label for="floatingInput">Usuario</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" formControlName="password" class="form-control" placeholder="Password">
+      <label for="floatingPassword">Contraseña</label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary submit-login" type="submit">Iniciar Sesión</button>
+
+    <div class="feedback">
+      <br>
+      <div *ngIf="submitted && f['username'].errors">
+        <div *ngIf="f['username'].errors['required']"><p><span class="feedback-error">Campo usuario es requerido</span></p></div>
+      </div>
+      <div *ngIf="submitted && f['password'].errors">
+        <div *ngIf="f['password'].errors['required']"><p><span class="feedback-error">Campo contraseña es requerido</span></p></div>
+      </div>
+      <div *ngIf="submitted && error">
+        <p><span class="feedback-error">{{error.error.message}}</span></p>
+      </div>
+    </div>
+
+  </form>
+</main>

@@ -1,0 +1,48 @@
+<div class="modal fade" id="modalTicket" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Crear Ticket</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="inTxtSubject" class="form-label">Título</label>
+            <input type="text" formControlName="subject" class="form-control" id="inTxtSubject" placeholder="Título">
+            <div *ngIf="submitted && f['subject'].errors && !reset">
+              <div *ngIf="f['subject'].errors['required']"><p><span class="feedback-error">Campo título es requerido</span></p></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="txtDescription" class="form-label">Descripción</label>
+            <textarea formControlName="description" class="form-control" id="txtDescription" rows="3"></textarea>
+            <div *ngIf="submitted && f['description'].errors && !reset">
+              <div *ngIf="f['description'].errors['required']"><p><span class="feedback-error">Campo Descripción es requerido</span></p></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="cmbAssignedUser" class="form-label">Asignar Usuario</label>
+            <select formControlName="assigned_user" id="cmbAssignedUser" class="form-select" aria-label="Default">
+              <option value="">Selecciona usuario...</option>
+              <option value="{{user.username}}" *ngFor="let user of users">{{user.first_name}} {{user.last_name}}</option>
+            </select>
+            <div *ngIf="submitted && f['assigned_user'].errors && !reset">
+              <div *ngIf="f['assigned_user'].errors['required']"><p><span class="feedback-error">Campo Usuario Asignado es requerido</span></p></div>
+            </div>
+          </div>
+          <div *ngIf="submitted && !loading && !error && !errorValidation" class="alert alert-success" role="alert">
+            Ticket creado correctamente.
+          </div>
+          <div *ngIf="submitted && !loading && error" class="alert alert-danger" role="alert">
+            Hubo un error al intentar crear el ticket.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary float-start" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<app-header></app-header>
+
+<div class="container">
+  <h3>CRUD de Tickets</h3>
+  <hr>
+  <div class="row">
+    <div class="col">
+      <app-modal (messageEvent)="receiveMessage($event)"></app-modal>
+      <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#modalTicket">
+        Crear Ticket
+      </button> <br><br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Usuario Creador</th>
+            <th>Usuario Asignado</th>
+            <th>Fecha Asignación</th>
+            <th>Fecha Resolución</th>
+            <th>Fecha Creación</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ticket of tickets">
+            <td>{{ticket.id}}</td>
+            <td>{{ticket.subject}}</td>
+            <td>{{ticket.creator_user}}</td>
+            <td>{{ticket.assigned_user}}</td>
+            <td>{{ticket.assignment_date | date: 'dd/MM/yyyy'}}</td>
+            <td>{{ticket.resolution_date | date: 'dd/MM/yyyy'}}</td>
+            <td>{{ticket.createdAt | date: 'dd/MM/yyyy'}}</td>
+            <td>{{ticket.Status.name}}</td>
+            <td>
+              <button *ngIf="ticket.status_id === 1" [routerLink]="['/admin/tickets/', ticket.id]" type="button" class="btn btn-outline-primary btn-sm">Editar</button> &nbsp;
+              <button *ngIf="ticket.status_id === 1" (click)="deleteTicket(ticket.id)" type="button" class="btn btn-outline-danger btn-sm">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

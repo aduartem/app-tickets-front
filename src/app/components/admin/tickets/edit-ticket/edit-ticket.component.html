@@ -1,0 +1,31 @@
+<app-header></app-header>
+
+<div class="container">
+  <h3>Editar Ticket</h3>
+  <hr>
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <div class="mb-3">
+      <label for="inTxtSubject" class="form-label">Título</label>
+      <input type="text" formControlName="subject" class="form-control" id="inTxtSubject" placeholder="Título">
+    </div>
+    <div class="mb-3">
+      <label for="txtDescription" class="form-label">Descripción</label>
+      <textarea formControlName="description" class="form-control" id="txtDescription" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="cmbAssignedUser" class="form-label">Asignar Usuario</label>
+      <select formControlName="assigned_user" id="cmbAssignedUser" class="form-select" aria-label="Default">
+        <option value="{{user.username}}" *ngFor="let user of users">{{user.first_name}} {{user.last_name}}</option>
+      </select>
+    </div>
+    <button (click)="goBack()" class="btn btn-secondary float-start" type="button">Volver</button>
+    <button class="btn btn-primary float-end" type="submit">Guardar</button>
+    <br><br>
+    <div *ngIf="submitted && !loading && !error" class="alert alert-success" role="alert">
+      Los cambios se guardaron correctamente.
+    </div>
+    <div *ngIf="submitted && !loading && error" class="alert alert-danger" role="alert">
+      Hubo un error al intentar guardar.
+    </div>
+  </form>
+</div>

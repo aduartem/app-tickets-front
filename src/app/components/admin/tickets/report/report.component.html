@@ -1,0 +1,32 @@
+<app-header></app-header>
+
+<div class="container">
+  <h3>Reporte de Tickets</h3>
+  <hr>
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead class="table-light">
+          <tr>
+            <th>Dev</th>
+            <th>Tickets por resolver</th>
+            <th>Tickets resueltos</th>
+            <th>Tickets Rechazados</th>
+            <th>Tickets anulados</th>
+            <th>Tickets totales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of report">
+            <td>{{row.dev.fullname}}</td>
+            <td>{{row.dev.ticketReport.totalToSolve}}</td>
+            <td>{{row.dev.ticketReport.totalResolved}}</td>
+            <td>{{row.dev.ticketReport.totalRejected}}</td>
+            <td>{{row.dev.ticketReport.totalCanceled}}</td>
+            <td>{{row.dev.ticketReport.totalTickets}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
